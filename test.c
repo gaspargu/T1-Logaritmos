@@ -3,7 +3,6 @@
 
 #include "ordenamiento.h"
 #include "rtree.h"
-#include "exp.h"
 
 int main() {
 

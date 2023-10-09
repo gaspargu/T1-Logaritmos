@@ -21,6 +21,10 @@ typedef struct {
 void printRect(Rect rect);
 void printArrayOfRect(Rect *arr, int n);
 int intersect(Rect r1, Rect r2);
+Rect *sortByX(Rect *arr, int n);
+int randInt(int min, int max);
+Rect *Rset(int n);
+Rect *Qset();
 
 
 
