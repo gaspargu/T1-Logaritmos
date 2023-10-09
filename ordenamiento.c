@@ -50,21 +50,3 @@ void printIntArray(int *x, int n) {
     }
     printf("]\n");
 }
-
-
-// int main() {
-
-//     // test quicksort
-
-//     double a[] = {2,1.0,3.0,2.3,1.1,9.,10.};
-//     int id[] = {0,1,2,3,4,5,6};
-
-//     printDoubleArray(a, 7);
-//     printIntArray(id, 7);
-//     quicksort(a,id,0,6);
-//     printDoubleArray(a, 7);
-//     printIntArray(id, 7);
-
-    
-//     return 0;
-// }
