@@ -25,6 +25,6 @@ Rect *sortByX(Rect *arr, int n);
 int randInt(int min, int max);
 Rect *Rset(int n);
 Rect *Qset();
-
+Rect MBR(Rect *array, int n);
 
 

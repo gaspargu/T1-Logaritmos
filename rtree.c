@@ -95,4 +95,20 @@ Rect *Qset() {
     return res;
 }
 
+// Recibe un arreglo de tamaño n (de rectangulos) y devuelve el MBR que los encapsula
+Rect MBR(Rect *array, int n) {
+    Rect mbr = {500000,500000,0,0};
+    for (int i=0; i<n; i++) {
+        if (array[i].x1 < mbr.x1)
+            mbr.x1 = array[i].x1;
+        if (array[i].y1 < mbr.y1)
+            mbr.y1 = array[i].y1;
+        if (array[i].x2 > mbr.x2)
+            mbr.x2 = array[i].x2;
+        if (array[i].y2 > mbr.y2)
+            mbr.y2 = array[i].y2;
+    }
+
+    return mbr;
+}
 

@@ -33,6 +33,13 @@ int main() {
     Rect *arr_sort = sortByX(arr, 4);
     printArrayOfRect(arr,4);
     printArrayOfRect(arr_sort,4);
-    
+
+    // test MBR
+    Rect r[] = {r1,r2,r3};
+    Rect mbr = MBR(r, 3);
+    printRect(mbr);
+    printRect(mbr);
     return 0;
+
+
 }
