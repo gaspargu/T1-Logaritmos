@@ -119,36 +119,45 @@ Rect MBR(Rect *array, int n) {
 
 // crea el RTree a partir de un nodo que tiene como claves a todos los n rectangulos 
 // termina formando un RTree con nodos de a lo más M claves
-Node *createRTree(Node *node, int n, int M) { 
+Node *createRTree(Node *node, int n, int M, int primera) { 
     int techo = division_techo(n,M); //numero de nodos 
     int keys_of_last_node = n%M;
-    
     // Caso base: el numero n de rectangulos es menor o igual a M (nodo raíz)
     if (techo == 1) { 
-     return node;
+        return node;
     } 
 
     // Caso recursivo
     else { 
         Rect *p = node->keys; // puntero que recorre el arreglo de rectangulos
+        
+        Node **q = node->childs; // puntero que recorre el arreglo de hijos
         Node *nodo_padre = malloc(sizeof(Node));
         nodo_padre->num_keys = techo;
         Rect *keys = malloc(techo*sizeof(Rect)); 
         Node **childs = malloc(techo*sizeof(Node *));
 
-        for (int i=0; i<(techo-1); i++) {
-          Node *n = malloc(sizeof(Node));
-          n->num_keys = M;
-          Rect *keys_child = malloc(M*sizeof(Rect));
-          n->childs = NULL;
-
-          for (int j=0; j<M; j++) {
+        for (int i=0; i<(n/M); i++) {
+            Node *n = malloc(sizeof(Node));
+            n->num_keys = M;
+            Rect *keys_child = malloc(M*sizeof(Rect));
+            n->childs = malloc(M*sizeof(Node *));
+          
+    
+            for (int j=0; j<M; j++) {
             keys_child[j] = *p;
             p++;
+            if (primera) {
+                n->childs[j] = NULL;
+            } else {
+                n->childs[j] = *q;
+                q++;                
+            }
           }
 
           n->keys = keys_child;
           keys[i] = MBR(n->keys, n->num_keys);
+
           childs[i] = n;
         }
 
@@ -157,10 +166,18 @@ Node *createRTree(Node *node, int n, int M) {
             Node *n = malloc(sizeof(Node));
             n->num_keys = keys_of_last_node;
             Rect *keys_child = malloc(keys_of_last_node*sizeof(Rect));
-            n->childs = NULL;
+
+            n->childs = malloc(keys_of_last_node*sizeof(Node *));
+
             for (int j=0; j<keys_of_last_node; j++) {
                 keys_child[j] = *p;
                 p++;
+                if (primera) {
+                    n->childs[j] = NULL;
+                } else {
+                    n->childs[j] = *q;
+                    q++;
+                }
             }
 
             n->keys = keys_child;
@@ -168,13 +185,39 @@ Node *createRTree(Node *node, int n, int M) {
             childs[techo-1] = n;
         }
 
+
         nodo_padre->keys = keys;
         nodo_padre->childs = childs;
 
+        //printArrayOfRect(nodo_padre->keys, nodo_padre->num_keys);
         // terminado de crear este nivel del árbol, seguimos la recursión hasta llegar a la raíz
-        createRTree(nodo_padre, techo, M);  
+        return createRTree(nodo_padre, techo, M, 0);  
     }
 }
 
 
-void printRTree(Node *node);
+void printRTree(Node *node) {
+    
+    if (node==NULL) {
+        printf("NULL");    
+    } else {
+        printf("[");
+        int num_keys = node->num_keys;
+        Rect *keys = node->keys;
+        Node **childs = node->childs;
+        
+        for (int i=0; i < num_keys; i++) {
+             Rect r = keys[i];
+             printf("(%i,%i,%i,%i) ", r.x1, r.y1, r.x2, r.y2);
+        }
+    printf("] {");
+        for (int i=0; i < num_keys; i++) {
+             Node *n = childs[i];
+             printRTree(n);
+             printf(" ");
+        }
+        printf("}");
+
+    }
+
+}

@@ -28,7 +28,7 @@ int randInt(int min, int max);
 Rect *Rset(int n);
 Rect *Qset();
 Rect MBR(Rect *array, int n);
-Node *createRTree(Node *node, int n, int M);
+Node *createRTree(Node *node, int n, int M, int primera);
 void printRTree(Node *node);
 
 
