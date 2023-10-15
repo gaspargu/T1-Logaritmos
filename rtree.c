@@ -190,13 +190,17 @@ Node *createRTree(Node *node, int n, int M, int primera) {
         nodo_padre->keys = keys;
         nodo_padre->childs = childs;
 
-        //printArrayOfRect(nodo_padre->keys, nodo_padre->num_keys);
         // terminado de crear este nivel del árbol, seguimos la recursión hasta llegar a la raíz
         return createRTree(nodo_padre, techo, M, 0);  
     }
 }
 
 
+// Imprime el RTree
+// Notacion: 
+// () RECTANGULO
+// [] ARREGLO DE RECTANGULOS
+// Un nodo se ve así: [clave1, clave2, ...] {hijo1, hijo2, ... }  (las claves son rectangulos)
 void printRTree(Node *node) {
     
     if (node==NULL) {
