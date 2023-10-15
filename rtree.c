@@ -4,6 +4,11 @@
 #include "ordenamiento.h"
 #include "rtree.h"
 
+// División techo 
+int division_techo(int x, int y) {
+    return x/y + (x % y != 0);
+}
+
 // Función para imprimir un rectangulo
 void printRect(Rect rect) {
     printf("(%i,%i,%i,%i)\n", rect.x1, rect.y1, rect.x2, rect.y2);
@@ -112,3 +117,64 @@ Rect MBR(Rect *array, int n) {
     return mbr;
 }
 
+// crea el RTree a partir de un nodo que tiene como claves a todos los n rectangulos 
+// termina formando un RTree con nodos de a lo más M claves
+Node *createRTree(Node *node, int n, int M) { 
+    int techo = division_techo(n,M); //numero de nodos 
+    int keys_of_last_node = n%M;
+    
+    // Caso base: el numero n de rectangulos es menor o igual a M (nodo raíz)
+    if (techo == 1) { 
+     return node;
+    } 
+
+    // Caso recursivo
+    else { 
+        Rect *p = node->keys; // puntero que recorre el arreglo de rectangulos
+        Node *nodo_padre = malloc(sizeof(Node));
+        nodo_padre->num_keys = techo;
+        Rect *keys = malloc(techo*sizeof(Rect)); 
+        Node **childs = malloc(techo*sizeof(Node *));
+
+        for (int i=0; i<(techo-1); i++) {
+          Node *n = malloc(sizeof(Node));
+          n->num_keys = M;
+          Rect *keys_child = malloc(M*sizeof(Rect));
+          n->childs = NULL;
+
+          for (int j=0; j<M; j++) {
+            keys_child[j] = *p;
+            p++;
+          }
+
+          n->keys = keys_child;
+          keys[i] = MBR(n->keys, n->num_keys);
+          childs[i] = n;
+        }
+
+        // caso en que la división n/M no es entera se crea el ultimo nodo con menos de M claves
+        if (keys_of_last_node) {
+            Node *n = malloc(sizeof(Node));
+            n->num_keys = keys_of_last_node;
+            Rect *keys_child = malloc(keys_of_last_node*sizeof(Rect));
+            n->childs = NULL;
+            for (int j=0; j<keys_of_last_node; j++) {
+                keys_child[j] = *p;
+                p++;
+            }
+
+            n->keys = keys_child;
+            keys[techo-1] = MBR(n->keys, n->num_keys);
+            childs[techo-1] = n;
+        }
+
+        nodo_padre->keys = keys;
+        nodo_padre->childs = childs;
+
+        // terminado de crear este nivel del árbol, seguimos la recursión hasta llegar a la raíz
+        createRTree(nodo_padre, techo, M);  
+    }
+}
+
+
+void printRTree(Node *node);

@@ -9,8 +9,9 @@ typedef struct {
 
 // Estructura que representa un nodo del Rtree
 typedef struct node {
-    Rect *rect;
-    struct node *child;
+    int num_keys;  // numero de claves (e hijos) del nodo
+    Rect *keys;
+    struct node **childs;
 } Node;
 
 // estructura para almacenar un Rtree
@@ -18,6 +19,7 @@ typedef struct {
     Node *root;
 } RTree;
 
+int division_techo(int x, int y);
 void printRect(Rect rect);
 void printArrayOfRect(Rect *arr, int n);
 int intersect(Rect r1, Rect r2);
@@ -26,5 +28,7 @@ int randInt(int min, int max);
 Rect *Rset(int n);
 Rect *Qset();
 Rect MBR(Rect *array, int n);
+Node *createRTree(Node *node, int n, int M);
+void printRTree(Node *node);
 
 
