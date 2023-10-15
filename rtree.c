@@ -119,7 +119,8 @@ Rect MBR(Rect *array, int n) {
 
 // crea el RTree a partir de un nodo que tiene como claves a todos los n rectangulos 
 // termina formando un RTree con nodos de a lo más M claves
-Node *createRTree(Node *node, int n, int M, int primera) { 
+// La funcion se debe llamar con el argumento start=1 (necesario para la recursion)
+Node *createRTree(Node *node, int n, int M, int start) { 
     int techo = division_techo(n,M); //numero de nodos 
     int keys_of_last_node = n%M;
     // Caso base: el numero n de rectangulos es menor o igual a M (nodo raíz)
@@ -148,7 +149,7 @@ Node *createRTree(Node *node, int n, int M, int primera) {
             for (int j=0; j<M; j++) {
             keys_child[j] = *p;
             p++;
-            if (primera) {
+            if (start) {
                 n->childs[j] = NULL;
             } else {
                 n->childs[j] = *q;
@@ -173,7 +174,7 @@ Node *createRTree(Node *node, int n, int M, int primera) {
             for (int j=0; j<keys_of_last_node; j++) {
                 keys_child[j] = *p;
                 p++;
-                if (primera) {
+                if (start) {
                     n->childs[j] = NULL;
                 } else {
                     n->childs[j] = *q;
@@ -202,7 +203,6 @@ Node *createRTree(Node *node, int n, int M, int primera) {
 // [] ARREGLO DE RECTANGULOS
 // Un nodo se ve así: [clave1, clave2, ...] {hijo1, hijo2, ... }  (las claves son rectangulos)
 void printRTree(Node *node) {
-    
     if (node==NULL) {
         printf("NULL");    
     } else {
@@ -222,7 +222,8 @@ void printRTree(Node *node) {
              printf(" ");
         }
         printf("}");
-
     }
-
 }
+
+
+

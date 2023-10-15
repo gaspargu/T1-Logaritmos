@@ -54,8 +54,11 @@ int main() {
         n->childs[i] = NULL;
     }
     Node *n_rtree = createRTree(n, n->num_keys, 2, 1);
-
     printRTree(n_rtree);
+
+    
+
+
 
     return 0;
 }
