@@ -137,6 +137,7 @@ Node *createRTree(Node *node, int n, int M, int primera) {
         Rect *keys = malloc(techo*sizeof(Rect)); 
         Node **childs = malloc(techo*sizeof(Node *));
 
+        // itera para separar descoponer el nodo en n/M nodos cada uno con M claves y M hijos
         for (int i=0; i<(n/M); i++) {
             Node *n = malloc(sizeof(Node));
             n->num_keys = M;
