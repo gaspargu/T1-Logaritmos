@@ -38,7 +38,7 @@ Rect *sortByX(Rect *arr, int n) {
     // Creamos un arreglo con las coordenadas x del centro de los rectangulos
     double *x = malloc(n*sizeof(double));
     for (int i=0; i<n; i++) {
-        x[i] = arr[i].xm;
+        x[i] = (arr[i].x1 + arr[i].x2)/2.0;
     }
 
     // Creamos un arreglo con los indices
@@ -70,12 +70,10 @@ Rect *Rset(int n) {
     for(int i=0; i<n; i++) {
         int x1 = randInt(0, 500000-100);
         int x2 = x1 + randInt(0, 100);
-        double xm = (x1+x2)/2.0;
         int y1 = randInt(0, 500000-100);
-        double ym = (x1+x2)/2.0;
         int y2 = y1 + randInt(0, 100);
 
-        Rect r = {x1,y1,x2,y2,xm,ym};
+        Rect r = {x1,y1,x2,y2};
         res[i] = r;
     }
 
@@ -88,12 +86,10 @@ Rect *Qset() {
     for(int i=0; i<100; i++) {
         int x1 = randInt(0, 500000-100000);
         int x2 = x1 + randInt(0, 100000);
-        double xm = (x1+x2)/2.0;
         int y1 = randInt(0, 500000-100000);
         int y2 = y1 + randInt(0, 100000);
-        double ym = (y1+y2)/2.0;
 
-        Rect r = {x1,y1,x2,y2,xm,ym};
+        Rect r = {x1,y1,x2,y2};
         res[i] = r;
     }
 

@@ -4,7 +4,6 @@
 // Estructura de un rectangulo son dos pares de puntos (x1,y1) y (x2,y2)
 typedef struct {
     int x1, y1, x2, y2;
-    double xm, ym;  // centro del rectangulo
 } Rect;
 
 // Estructura que representa un nodo del Rtree
