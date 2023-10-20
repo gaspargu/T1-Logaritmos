@@ -6,17 +6,18 @@ typedef struct {
     int x1, y1, x2, y2;
 } Rect;
 
+typedef struct {
+    Rect *array;
+    int n;
+    int accesos;
+} Res;
+
 // Estructura que representa un nodo del Rtree
 typedef struct node {
     int num_keys;  // numero de claves (e hijos) del nodo
     Rect *keys;
     struct node **childs;
 } Node;
-
-// estructura para almacenar un Rtree
-typedef struct {
-    Node *root;
-} RTree;
 
 int division_techo(int x, int y);
 void printRect(Rect rect);

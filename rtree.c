@@ -26,7 +26,7 @@ void printArrayOfRect(Rect *arr, int n) {
 
 // Entrega 1 si los rectangulos se intersectan, 0 si no
 int intersect(Rect r1, Rect r2) {
-    if (r1.x2 < r2.x1 || r1.y2 < r2.y1 || r2.x2 < r1.x1 || r2.y2 < r1.y1) {
+    if (r1.x2 < r2.x1 || r1.x1 > r2.x2 || r1.y2 < r2.y1 || r1.y1 > r2.y2) {
         return 0;
     } else {
         return 1;
