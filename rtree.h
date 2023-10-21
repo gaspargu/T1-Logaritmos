@@ -22,6 +22,7 @@ typedef struct node {
 int division_techo(int x, int y);
 void printRect(Rect rect);
 void printArrayOfRect(Rect *arr, int n);
+void printArrayOfLong(long *arr, int n);
 int intersect(Rect r1, Rect r2);
 Rect *sortByX(Rect *arr, int n);
 int randInt(int min, int max);

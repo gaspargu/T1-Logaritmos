@@ -24,6 +24,16 @@ void printArrayOfRect(Rect *arr, int n) {
     printf("]\n");
 }
 
+// Función para imprimir un arreglo de rectangulos, tamaño del arreglo n 
+void printArrayOfLong(long *arr, int n) {
+    printf("[");
+    for (int i = 0; i < n; i++) {
+        long l = arr[i];
+        printf("%ld,", l);
+    }
+    printf("]\n");
+}
+
 // Entrega 1 si los rectangulos se intersectan, 0 si no
 int intersect(Rect r1, Rect r2) {
     if (r1.x2 < r2.x1 || r1.x1 > r2.x2 || r1.y2 < r2.y1 || r1.y1 > r2.y2) {
