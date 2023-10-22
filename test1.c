@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "ordenamiento.h"
 #include "rtree.h"
@@ -28,6 +29,16 @@ int main() {
     printf("Ordenado por coordenada x:\n");
     printArrayOfRect(arr_sort,4);
     printf("\n");
+
+    // test ordena rectangulos por coordenada y
+    Rect *arr_y = Rset(4);
+    Rect *arr_sort_y = sortByY(arr_y, 4);
+    printf("Arreglo de rectangulos desordenados:\n");
+    printArrayOfRect(arr_y,4);
+    printf("Ordenado por coordenada y:\n");
+    printArrayOfRect(arr_sort_y,4);
+    printf("\n");
+
 
     // test MBR
     Rect r[] = {r1,r2,r3};

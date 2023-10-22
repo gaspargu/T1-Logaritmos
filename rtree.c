@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 #include "ordenamiento.h"
 #include "rtree.h"
@@ -67,6 +68,50 @@ Rect *sortByX(Rect *arr, int n) {
     }
 
     return res;
+}
+
+Rect *sortByY(Rect *arr, int n) {
+
+    // Creamos un arreglo con las coordenadas x del centro de los rectangulos
+    double *y = malloc(n*sizeof(double));
+    for (int i=0; i<n; i++) {
+        y[i] = (arr[i].y1 + arr[i].y2)/2.0;
+    }
+
+    // Creamos un arreglo con los indices
+    int *id = malloc(n*sizeof(int));
+    for (int i=0; i<n; i++) {
+        id[i] = i;
+    }
+
+    // ordenamos, esto va a dejar en el arreglo id las permutaciones que se hicieron
+    quicksort(y, id, 0, n-1);
+
+    // ordenamos los rectangulos usando las permutaciones
+    Rect *res = malloc(n*sizeof(Rect));
+    for (int i=0; i<n; i++) {
+        res[i] = arr[id[i]];
+    }
+
+    return res;
+}
+
+Rect *sortBySTR(Rect *arr, int n, int M) {
+    Rect *arr_sort = sortByX(arr,n);
+    Rect *arr_sort_y = malloc(n*sizeof(Rect));
+    int S = ceil(sqrt((double)n/M));
+
+    // Creamos un arreglo con los indices
+    int *id = malloc(n*sizeof(int));
+    for (int i=0; i<n; i++) {
+        id[i] = i;
+    }
+
+    //int *p_arr_sort = arr_sort; // puntero que recorre el arreglo a ordenar
+    int *p_id = id; // puntero que recorre el arreglo de id
+    Rect *p_arr_sort_y = arr_sort_y; // puntero que guarda los arreglos ordenados 
+
+    return arr_sort;
 }
 
 // Generador de entero aleatorio en el rango [min, max]
