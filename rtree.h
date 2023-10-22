@@ -26,6 +26,7 @@ void printArrayOfLong(long *arr, int n);
 int intersect(Rect r1, Rect r2);
 Rect *sortByX(Rect *arr, int n);
 Rect *sortByY(Rect *arr, int n);
+Rect *sortBySTR(Rect *arr, int n, int M);
 int randInt(int min, int max);
 Rect *Rset(int n);
 Rect *Qset();

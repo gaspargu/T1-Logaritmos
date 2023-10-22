@@ -22,21 +22,30 @@ int main() {
 
 
     // test ordena rectangulos por coordenada x
-    Rect *arr = Rset(4);
-    Rect *arr_sort = sortByX(arr, 4);
+    Rect *arr_x = Rset(4);
+    Rect *arr_x_sort = sortByX(arr_x, 4);
     printf("Arreglo de rectangulos desordenados:\n");
-    printArrayOfRect(arr,4);
+    printArrayOfRect(arr_x,4);
     printf("Ordenado por coordenada x:\n");
-    printArrayOfRect(arr_sort,4);
+    printArrayOfRect(arr_x_sort,4);
     printf("\n");
 
     // test ordena rectangulos por coordenada y
     Rect *arr_y = Rset(4);
-    Rect *arr_sort_y = sortByY(arr_y, 4);
+    Rect *arr_y_sort = sortByY(arr_y, 4);
     printf("Arreglo de rectangulos desordenados:\n");
     printArrayOfRect(arr_y,4);
     printf("Ordenado por coordenada y:\n");
-    printArrayOfRect(arr_sort_y,4);
+    printArrayOfRect(arr_y_sort,4);
+    printf("\n");
+
+    // test ordena rectangulos por STR
+    Rect *arr_STR = Rset(4);
+    Rect *arr_STR_sort = sortBySTR(arr_STR, 4, 1);
+    printf("Arreglo de rectangulos desordenados:\n");
+    printArrayOfRect(arr_STR,4);
+    printf("Ordenado por STR:\n");
+    printArrayOfRect(arr_STR_sort,4);
     printf("\n");
 
 

@@ -107,11 +107,30 @@ Rect *sortBySTR(Rect *arr, int n, int M) {
         id[i] = i;
     }
 
-    //int *p_arr_sort = arr_sort; // puntero que recorre el arreglo a ordenar
+    Rect *p_arr_sort = arr_sort; // puntero que recorre el arreglo a ordenar
     int *p_id = id; // puntero que recorre el arreglo de id
     Rect *p_arr_sort_y = arr_sort_y; // puntero que guarda los arreglos ordenados 
 
-    return arr_sort;
+    for (int i=0; i<n/S; i++) {
+        Rect *r=sortByY(arr_sort, S);
+        for (int j=0; j<S; j++) {
+            *p_arr_sort_y = r[j];
+            p_arr_sort_y++;
+        }
+        free(r);
+        arr_sort+=S;
+    }
+
+    if(n%S) {
+        Rect *r=sortByY(arr_sort, n%S);
+        for (int j=0; j<n%S; j++) {
+            *p_arr_sort_y = r[j];
+            p_arr_sort_y++;
+        }
+        free(r);
+    }
+
+    return arr_sort_y;
 }
 
 // Generador de entero aleatorio en el rango [min, max]
